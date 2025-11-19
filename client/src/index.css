@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'Inter', sans-serif;
-  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
   
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -35,57 +35,58 @@
 }
 
 :root {
-  /* Clean Medical Theme */
-  --background: 210 40% 98%;
-  --foreground: 222 47% 11%;
+  /* Theme: Bionic Warmth / Soft Future */
+  /* Warm, human-centric base */
+  --background: 30 20% 97%; /* Soft Cream */
+  --foreground: 240 10% 10%; /* Soft Black */
 
-  /* Sirius Blue */
-  --primary: 215 90% 45%;
-  --primary-foreground: 210 40% 98%;
+  /* Electric Indigo - Intelligence */
+  --primary: 250 80% 55%;
+  --primary-foreground: 0 0% 100%;
 
-  /* Adherence Teal */
-  --secondary: 160 84% 39%;
-  --secondary-foreground: 210 40% 98%;
+  /* Living Coral - Humanity */
+  --secondary: 15 90% 65%;
+  --secondary-foreground: 0 0% 100%;
 
-  /* Soft Purple Accent */
-  --accent: 260 60% 96%;
-  --accent-foreground: 260 50% 40%;
+  /* Soft Lavender - Accent */
+  --accent: 250 30% 94%;
+  --accent-foreground: 250 40% 30%;
 
-  --muted: 215 20% 90%;
-  --muted-foreground: 215 20% 40%;
+  --muted: 30 10% 90%;
+  --muted-foreground: 240 5% 40%;
 
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
+  --card-foreground: 240 10% 10%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
-  --ring: 215 90% 45%;
+  --border: 30 10% 85%;
+  --input: 30 10% 85%;
+  --ring: 250 80% 55%;
 
-  --radius: 0.75rem;
+  --radius: 1.5rem; /* More organic, rounded corners */
 }
 
 .dark {
-  --background: 222 47% 11%;
-  --foreground: 210 40% 98%;
+  --background: 240 10% 10%;
+  --foreground: 30 20% 97%;
 
-  --primary: 215 90% 55%;
-  --primary-foreground: 222 47% 11%;
+  --primary: 250 80% 65%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 160 84% 45%;
-  --secondary-foreground: 222 47% 11%;
+  --secondary: 15 90% 65%;
+  --secondary-foreground: 0 0% 100%;
 
-  --accent: 260 50% 20%;
-  --accent-foreground: 260 60% 96%;
+  --accent: 250 20% 20%;
+  --accent-foreground: 250 30% 90%;
 
-  --muted: 217 19% 27%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 240 10% 15%;
+  --muted-foreground: 240 5% 60%;
 
-  --card: 217 19% 20%;
-  --card-foreground: 210 40% 98%;
+  --card: 240 10% 13%;
+  --card-foreground: 30 20% 97%;
 
-  --border: 217 19% 27%;
-  --input: 217 19% 27%;
-  --ring: 215 90% 55%;
+  --border: 240 10% 20%;
+  --input: 240 10% 20%;
+  --ring: 250 80% 65%;
 }
 
 @layer base {
@@ -93,7 +94,7 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground selection:bg-secondary selection:text-white;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold tracking-tight;

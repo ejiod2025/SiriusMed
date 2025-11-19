@@ -1,94 +1,75 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Activity, MessageCircle, Phone, Bell } from "lucide-react";
 
 export default function ContinuousLayer() {
   return (
-    <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
-        {/* Background Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-        
+    <section className="py-32 bg-background overflow-hidden relative">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">SiriusMed lives in the gap between visits.</h2>
-            <p className="text-gray-400 text-lg">
-                We don't replace providers. We extend their care into the 99% of time patients spend outside the clinic.
+        <div className="text-center max-w-4xl mx-auto mb-24">
+            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8 text-foreground">The Continuous Health Layer</h2>
+            <p className="text-xl text-muted-foreground">
+                We don't replace providers. We act as the intelligent connective tissue between visits.
             </p>
         </div>
 
-        <div className="relative h-[400px] flex items-center justify-between">
-            {/* Left Side: Clinic */}
-            <div className="w-48 text-center shrink-0 z-20">
-                <div className="w-24 h-24 mx-auto bg-white rounded-2xl flex items-center justify-center shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] mb-4">
-                    <Activity size={40} className="text-slate-900" />
-                </div>
-                <h3 className="font-bold text-xl">Clinic Visit</h3>
-                <p className="text-sm text-slate-500 mt-2">Prescription & Diagnosis</p>
-            </div>
+        {/* Visual Timeline - Organic Flow */}
+        <div className="relative min-h-[400px]">
+             {/* SVG Path for the wavy line */}
+             <svg className="absolute top-0 left-0 w-full h-full overflow-visible" preserveAspectRatio="none">
+                <motion.path
+                    d="M0,100 C300,100 300,200 600,200 S900,100 1200,100"
+                    fill="none"
+                    stroke="url(#gradient)"
+                    strokeWidth="4"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                />
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.2" />
+                        <stop offset="50%" stopColor="var(--color-primary)" />
+                        <stop offset="100%" stopColor="var(--color-secondary)" />
+                    </linearGradient>
+                </defs>
+             </svg>
 
-            {/* The Bridge */}
-            <div className="flex-1 h-[2px] bg-slate-800 relative mx-8">
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-800 via-primary to-slate-800 opacity-50" />
-                
-                {/* Animated Dots/Particles */}
-                {[1,2,3,4,5,6].map((i) => (
+             {/* Floating Cards along the path */}
+             <div className="grid md:grid-cols-3 gap-8 relative z-10">
+                {[
+                    { 
+                        title: "Translate", 
+                        text: "Rx becomes a conversation.",
+                        pos: "translate-y-12" 
+                    },
+                    { 
+                        title: "Adapt", 
+                        text: "Adjusts to life & routine.",
+                        pos: "translate-y-32" 
+                    },
+                    { 
+                        title: "Report", 
+                        text: "Live data back to clinic.",
+                        pos: "translate-y-0" 
+                    }
+                ].map((card, i) => (
                     <motion.div
                         key={i}
-                        className="absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-slate-800/80 border border-slate-700 rounded-xl flex items-center justify-center text-primary"
-                        initial={{ left: "10%", opacity: 0, scale: 0.5 }}
-                        animate={{ 
-                            left: ["10%", "90%"],
-                            opacity: [0, 1, 1, 0],
-                            scale: [0.5, 1, 1, 0.5]
-                        }}
-                        transition={{ 
-                            duration: 4,
-                            repeat: Infinity,
-                            delay: i * 0.6,
-                            ease: "linear"
-                        }}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.3 }}
+                        className={`bg-white p-8 rounded-3xl shadow-xl border border-border ${card.pos}`}
                     >
-                        {i % 3 === 0 ? <MessageCircle size={16} /> : i % 3 === 1 ? <Phone size={16} /> : <Bell size={16} />}
+                        <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary font-bold text-xl">
+                            {i + 1}
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">{card.title}</h3>
+                        <p className="text-muted-foreground">{card.text}</p>
                     </motion.div>
                 ))}
-
-                {/* Labels underneath */}
-                <div className="absolute top-12 w-full flex justify-between px-12 text-xs font-mono text-slate-600 uppercase tracking-wider">
-                    <span>Day 1</span>
-                    <span>Day 7</span>
-                    <span>Day 14</span>
-                    <span>Month 1</span>
-                </div>
-            </div>
-
-            {/* Right Side: Next Appointment */}
-            <div className="w-48 text-center shrink-0 z-20">
-                 <div className="w-24 h-24 mx-auto bg-slate-800 rounded-2xl flex items-center justify-center border border-slate-700 mb-4">
-                    <Activity size={40} className="text-slate-500" />
-                </div>
-                <h3 className="font-bold text-xl">Next Visit</h3>
-                <p className="text-sm text-slate-500 mt-2">3 Months Later</p>
-            </div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 mt-12">
-            {[
-                { title: "Translates Rx to Routine", desc: "Turns instructions into a daily, conversational plan." },
-                { title: "Adapts to Real Life", desc: "Handles shift work, travel, and bad days automatically." },
-                { title: "Clinician Visibility", desc: "Gives providers a live view of what's actually happening." }
-            ].map((item, i) => (
-                <motion.div 
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.2 }}
-                    className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 backdrop-blur-sm"
-                >
-                    <h4 className="text-lg font-bold mb-2 text-primary">{item.title}</h4>
-                    <p className="text-slate-400">{item.desc}</p>
-                </motion.div>
-            ))}
+             </div>
         </div>
       </div>
     </section>

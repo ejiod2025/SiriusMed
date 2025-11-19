@@ -10,22 +10,24 @@ import Footer from "@/components/sections/Footer";
 export default function Home() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden font-sans text-foreground selection:bg-primary selection:text-white">
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-all">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-primary-foreground font-bold font-heading text-xl shadow-lg shadow-primary/20">S</div>
-            <span className="font-heading font-bold text-2xl tracking-tight text-slate-900 dark:text-white">SiriusMed</span>
+      {/* Floating Nav */}
+      <header className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none">
+        <nav className="bg-white/80 dark:bg-black/80 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl rounded-full px-6 py-3 flex items-center gap-8 pointer-events-auto">
+           <div className="flex items-center gap-2 mr-4">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg shadow-lg">S</div>
+            <span className="font-heading font-bold text-xl tracking-tight hidden md:block">SiriusMed</span>
           </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
-            <a href="#gap" className="hover:text-primary transition-colors">The Gap</a>
-            <a href="#how-it-works" className="hover:text-primary transition-colors">How it Works</a>
-            <a href="#journey" className="hover:text-primary transition-colors">Patient Journey</a>
-            <a href="#clinicians" className="hover:text-primary transition-colors">For Clinicians</a>
-          </nav>
-          <button className="px-6 py-2.5 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold hover:opacity-90 transition-opacity shadow-lg">
+          
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+            <a href="#gap" className="hover:text-foreground transition-colors">The Gap</a>
+            <a href="#how-it-works" className="hover:text-foreground transition-colors">Platform</a>
+            <a href="#journey" className="hover:text-foreground transition-colors">Journey</a>
+          </div>
+
+          <button className="px-5 py-2 rounded-full bg-foreground text-background text-sm font-bold hover:scale-105 transition-transform">
             Book Demo
           </button>
-        </div>
+        </nav>
       </header>
 
       <main>

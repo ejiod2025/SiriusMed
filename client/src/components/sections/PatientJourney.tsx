@@ -5,35 +5,27 @@ import { Calendar, CheckCircle, Clock, HeartPulse } from "lucide-react";
 const EVENTS = [
   {
     day: "Day 0",
-    title: "Prescription Issued",
-    desc: "Doctor creates the plan. SiriusMed syncs instantly.",
+    title: "Prescription",
+    desc: "Instant sync from EMR.",
     icon: Calendar,
-    color: "bg-blue-500",
-    detail: "Hi Daniel, I'm your SiriusMed assistant. We'll start tonight at 8pm."
   },
   {
     day: "48 Hours",
-    title: "Getting Started",
-    desc: "Clear reminders and symptom check-ins.",
+    title: "Onboarding",
+    desc: "Symptom checks & education.",
     icon: Clock,
-    color: "bg-orange-500",
-    detail: "First dose taken! Let's check how you're feeling tomorrow."
   },
   {
     day: "Week 2",
-    title: "Building Routine",
-    desc: "Streak tracking and habit formation.",
+    title: "Routine",
+    desc: "Habit formation & streaks.",
     icon: CheckCircle,
-    color: "bg-green-500",
-    detail: "You've taken your meds 6 mornings in a row 🎉"
   },
   {
     day: "Month 3+",
-    title: "Continuous Health",
-    desc: "Long-term adherence trends and refill management.",
+    title: "Maintenance",
+    desc: "Long-term adherence tracking.",
     icon: HeartPulse,
-    color: "bg-purple-500",
-    detail: "Your adherence is 98%. Your doctor will be pleased!"
   }
 ];
 
@@ -45,45 +37,42 @@ export default function PatientJourney() {
   });
 
   return (
-    <section ref={containerRef} id="journey" className="py-24 bg-white">
+    <section ref={containerRef} id="journey" className="py-32 bg-slate-50 overflow-hidden">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-heading font-bold text-center mb-20">The Patient Journey</h2>
+        <h2 className="text-4xl md:text-6xl font-heading font-bold text-center mb-32">The Patient Journey</h2>
         
-        <div className="relative max-w-4xl mx-auto">
-            {/* Vertical Line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 -translate-x-1/2" />
+        <div className="relative max-w-6xl mx-auto">
+            {/* Connecting Line */}
+            <div className="absolute top-[60px] left-0 right-0 h-1 bg-gray-200 hidden md:block">
+                <motion.div 
+                    style={{ scaleX: scrollYProgress }}
+                    className="h-full bg-gradient-to-r from-primary to-secondary origin-left"
+                />
+            </div>
 
-            <div className="space-y-24">
+            <div className="grid md:grid-cols-4 gap-8">
                 {EVENTS.map((event, i) => (
                     <motion.div 
                         key={i}
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.5, delay: i * 0.1 }}
-                        className={`relative flex items-center gap-8 md:gap-16 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.2 }}
+                        className="relative pt-16 md:pt-24 text-center group"
                     >
-                        {/* Icon Node */}
-                        <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-white border-4 border-gray-100 shadow-xl flex items-center justify-center z-10">
-                            <div className={`w-8 h-8 rounded-full ${event.color} flex items-center justify-center text-white shadow-inner`}>
-                                <event.icon size={16} />
-                            </div>
+                        {/* Floating Node */}
+                        <div className="absolute top-0 md:top-[40px] left-1/2 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white border-4 border-gray-100 z-10 flex items-center justify-center shadow-lg group-hover:border-primary transition-colors duration-500">
+                            <div className="w-3 h-3 rounded-full bg-gray-300 group-hover:bg-primary transition-colors duration-500" />
                         </div>
 
-                        {/* Content Card */}
-                        <div className="ml-20 md:ml-0 w-full md:w-1/2">
-                            <div className={`bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow ${i % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-4 ${event.color}`}>{event.day}</span>
-                                <h3 className="text-2xl font-bold text-gray-900 mb-2">{event.title}</h3>
-                                <p className="text-gray-600 mb-4">{event.desc}</p>
-                                <div className={`bg-white p-4 rounded-xl text-sm font-medium text-gray-500 shadow-inner border border-gray-100 inline-block`}>
-                                    "{event.detail}"
-                                </div>
+                        <div className="bg-white p-6 rounded-3xl shadow-xl border border-gray-100 hover:-translate-y-2 transition-transform duration-300">
+                            <div className="w-12 h-12 rounded-xl bg-gray-50 text-gray-600 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                                <event.icon size={24} />
                             </div>
+                            <span className="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">{event.day}</span>
+                            <h3 className="text-xl font-bold mb-2">{event.title}</h3>
+                            <p className="text-gray-500 text-sm">{event.desc}</p>
                         </div>
-                        
-                        {/* Spacer for opposite side */}
-                        <div className="hidden md:block w-1/2" />
                     </motion.div>
                 ))}
             </div>

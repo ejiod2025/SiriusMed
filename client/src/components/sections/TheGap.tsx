@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import clinicImg from "@assets/generated_images/Clean_clinic_room_background_8c0fb298.png";
-import busyLifeImg from "@assets/generated_images/Busy_everyday_life_background_be108474.png";
+import chaosImg from "@assets/generated_images/Chaotic_to_ordered_abstract_visualization_f451e8b2.png";
 
 export default function TheGap() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -10,92 +9,81 @@ export default function TheGap() {
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-  const imageSwitch = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
+  const xLeft = useTransform(scrollYProgress, [0, 1], [-100, 0]);
+  const xRight = useTransform(scrollYProgress, [0, 1], [100, 0]);
   
   return (
-    <section ref={containerRef} id="gap" className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section ref={containerRef} id="gap" className="py-32 bg-foreground text-background relative overflow-hidden rounded-t-[3rem] -mt-12 z-20">
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-           {/* Text Side */}
-           <div>
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-700 font-semibold text-sm mb-6"
-                >
-                    The Adherence Gap
-                </motion.div>
-                <motion.h2 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6"
-                >
-                    What happens after <br/>"You're good to go"?
-                </motion.h2>
-                <motion.div
-                     initial={{ opacity: 0, y: 20 }}
-                     whileInView={{ opacity: 1, y: 0 }}
-                     viewport={{ once: true }}
-                     transition={{ delay: 0.2 }}
-                     className="space-y-6 text-lg text-gray-600"
-                >
-                    <p>
-                        In the exam room, everything is clear: why the medication matters, how to take it, what to watch for.
-                    </p>
-                    <p>
-                        But once patients leave, instructions blur into everyday chaos. Side effects raise silent doubts. Doses collide with work, kids, traffic, and stress.
-                    </p>
-                    <div className="p-6 bg-gray-50 rounded-2xl border-l-4 border-orange-500">
-                        <p className="font-medium text-gray-900">
-                            Providers only hear about “non-adherence” when it’s already a problem.
-                        </p>
-                    </div>
-                </motion.div>
-           </div>
+        <div className="mb-24 text-center">
+            <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-4xl md:text-6xl font-heading font-bold mb-6"
+            >
+                The Reality Gap
+            </motion.h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Why "good instructions" fail in the real world.
+            </p>
+        </div>
 
-           {/* Visual Side - Crossfade */}
-           <div className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-                <motion.div className="absolute inset-0 bg-black/10 z-10" />
-                
-                {/* Clinic Image */}
-                <motion.img 
-                    src={clinicImg} 
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ opacity: useTransform(imageSwitch, [0, 1], [1, 0]) }}
-                    alt="Quiet Clinic"
-                />
-                
-                {/* Busy Life Image */}
-                <motion.img 
-                    src={busyLifeImg} 
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ opacity: imageSwitch }}
-                    alt="Busy Life"
-                />
-
-                {/* Overlay Text */}
-                <div className="absolute bottom-8 left-8 right-8 z-20">
-                     <motion.div
-                        style={{ opacity: useTransform(imageSwitch, [0, 0.1], [1, 0]) }}
-                        className="bg-white/90 backdrop-blur px-6 py-4 rounded-xl shadow-lg"
-                     >
-                        <h4 className="font-bold text-primary">Step 1: Prescription Given</h4>
-                        <p className="text-sm text-gray-600">Instructions are clear. Motivation is high.</p>
-                     </motion.div>
-
-                     <motion.div
-                        style={{ opacity: useTransform(imageSwitch, [0.9, 1], [0, 1]) }}
-                        className="bg-white/90 backdrop-blur px-6 py-4 rounded-xl shadow-lg absolute bottom-0 left-0 right-0"
-                     >
-                        <h4 className="font-bold text-orange-600">Step 2: Life Gets in the Way</h4>
-                        <p className="text-sm text-gray-600">Confusion, forgotten doses, and chaos set in.</p>
-                     </motion.div>
+        <div className="grid lg:grid-cols-2 gap-0 border border-white/10 rounded-3xl overflow-hidden bg-white/5">
+           {/* Left: The Clinic (Order) */}
+           <div className="p-12 md:p-16 border-b lg:border-b-0 lg:border-r border-white/10 relative group">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                    <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 text-blue-400 font-mono text-xl">01</div>
+                    <h3 className="text-3xl font-bold mb-4">In the Clinic</h3>
+                    <ul className="space-y-4 text-gray-400">
+                        <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                            Perfect clarity
+                        </li>
+                        <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                            High motivation
+                        </li>
+                        <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                            "I understand, Doctor."
+                        </li>
+                    </ul>
                 </div>
            </div>
+
+           {/* Right: The World (Chaos) */}
+           <div className="p-12 md:p-16 relative group">
+                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                 <div className="relative z-10">
+                    <div className="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-6 text-orange-400 font-mono text-xl">02</div>
+                    <h3 className="text-3xl font-bold mb-4">In the Wild</h3>
+                    <ul className="space-y-4 text-gray-400">
+                        <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full" />
+                            Instructions blur
+                        </li>
+                        <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full" />
+                            Side effects cause doubt
+                        </li>
+                        <li className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-orange-500 rounded-full" />
+                            Life takes over
+                        </li>
+                    </ul>
+                 </div>
+           </div>
+        </div>
+        
+        {/* Floating Bridge Concept */}
+        <div className="mt-12 text-center">
+            <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold text-sm tracking-wide uppercase shadow-lg shadow-primary/25 cursor-pointer"
+            >
+                Bridging the Gap
+            </motion.div>
         </div>
       </div>
     </section>
