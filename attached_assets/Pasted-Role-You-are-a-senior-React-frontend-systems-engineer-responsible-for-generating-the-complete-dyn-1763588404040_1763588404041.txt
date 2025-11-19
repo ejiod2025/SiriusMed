@@ -1,0 +1,391 @@
+Role
+
+You are a senior React & frontend systems engineer responsible for generating the complete dynamic Adherence Webpage for SiriusMed.
+Your task is to transform high-level content into interactive, animated, production-ready UI components using React, TypeScript, Tailwind, and Framer Motion.
+
+The webpage focuses on these pillars:
+
+The Medication Adherence Gap
+
+The Patient Journey After Prescription
+
+Multi-channel Adherence Experience
+(WhatsApp, Voice Calls, Notifications, SMS)
+
+Continuous health support between clinic visits
+
+Dynamic storytelling animations
+
+You generate components, UI structures, copy blocks, timelines, and channel simulations—everything required for a full dynamic landing page.
+
+Primary Objectives
+
+Generate React components that bring the Adherence product story to life.
+
+Produce dynamic sections with animations (scroll, fade, channel switchers, timelines).
+
+Structure content for a modular landing page (hero, channel tabs, patient journey, clinical gap section, continuous care, CTA).
+
+Ensure design consistency with Tailwind + motion.
+
+Output code that is drop-in-ready for Next.js or CRA environments.
+
+Core Capabilities
+
+You can generate:
+
+1. Hero Sections
+
+Multi-layer animations
+
+Dynamic messaging around “prescription → real life → adherence gap”
+
+2. Channel Switcher Components
+
+Each channel must support:
+
+WhatsApp dynamic mock conversation
+
+Voice call transcript animation
+
+Notification cards with state awareness
+
+SMS fallback thread
+
+3. Patient Journey Timeline
+
+A scroll-driven experience showing:
+
+Day 0: Prescription issued
+
+First 48 hours
+
+Week 2–4
+
+Month 3+ continuous health
+Each stage should include UI elements that animate into view.
+
+4. Clinical Gap Visualization
+
+Illustrate:
+
+“Care inside the clinic”
+
+“Chaos outside the clinic”
+
+How SiriusMed bridges the gap
+
+5. Adherence Engine Visuals
+
+Components showing:
+
+State machine
+
+Dose event logic
+
+Risk detection
+
+Streak tracking
+
+6. CTA & Footer Sections
+Design Requirements
+
+Framework: React + TypeScript
+
+Styling: Tailwind CSS
+
+Animation: Framer Motion
+
+Layout system: Responsive, mobile-first
+
+Components: Encapsulated, portable, minimal prop API
+
+Optimized for dynamic landing pages
+## 1. Hero – “From Prescription to Everyday Life”
+
+**Headline:**
+**From “Here’s your prescription” to “I’ve actually taken it.”**
+
+**Subheadline:**
+SiriusMed Adherence is the always-on companion that walks with patients *after* they leave the clinic—over WhatsApp, voice calls, SMS, and intelligent notifications.
+
+**Body:**
+Most care stops at the prescription.
+We step in from the first dose and stay with the patient for every pill, inhaler, injection, and refill—turning treatment plans into lived routines, not forgotten instructions.
+
+**CTA buttons:**
+
+* **See the patient journey**
+* **Watch a WhatsApp conversation**
+
+**Animation idea:**
+
+* Center: animated phone UI.
+* Tabs auto-switch between **WhatsApp**, **Phone Call**, **Notification**, **SMS**, showing the *same dose* being nudged in different channels.
+* A subtle timeline under the phone animates: **“Prescription written → Day 1 → Day 14 → Month 3”**, with dots lighting up as the phone UI changes.
+
+---
+
+## 2. The Gap – What Happens After “You’re Good to Go”
+
+**Headline:**
+What happens after the prescription is printed?
+
+**Body:**
+In the exam room, everything is clear:
+why the medication matters, how to take it, what to watch for.
+
+But once patients leave:
+
+* Instructions blur into everyday chaos
+* Side effects raise silent doubts
+* Doses collide with work, kids, traffic, and stress
+* Providers only hear about “non-adherence” when it’s already a problem
+
+**Bottom line:** there’s a **huge care gap** between *prescribing* and *actually taking medication consistently*.
+
+**Animation idea:**
+
+* A simple **clinic room illustration** on the left fades out into a **busy real-life scene** (bus stop, kitchen, office).
+* Text overlay:
+
+  * Step 1: “Prescription given” (glows briefly, then fades)
+  * Step 2: “Life gets in the way” (calendar tiles, notifications, work emails crowd the screen)
+
+---
+
+## 3. Where SiriusMed Steps In – Continuous Health Layer
+
+**Headline:**
+SiriusMed lives in the gap between visits.
+
+**Body:**
+SiriusMed becomes the **continuous health layer** between clinic appointments:
+
+* Translates the prescription into a **daily, conversational plan**
+* Follows the patient in the channels they already use
+* Adapts to real life—traffic, shift work, bad days, flare-ups
+* Gives clinicians a live view of what’s *actually happening* with every dose
+
+We don’t replace providers.
+We extend their care into the 99% of time patients spend *outside* the clinic.
+
+**Animation idea:**
+
+* A **bridge graphic** between “Clinic Visit” and “Next Appointment.”
+* The bridge is made of WhatsApp bubbles, call waveforms, and notification cards that assemble as you scroll.
+* Small “patients” walk across, and under the bridge you see labels like “Missed doses,” “Side effects,” “Forgetfulness” fading out.
+
+---
+
+## 4. Multi-Channel Experience – WhatsApp, Calls, Notifications, SMS
+
+### 4.1 WhatsApp Companion
+
+**Subheading:**
+WhatsApp: adherence in the patient’s primary chat app.
+
+**Body:**
+Patients talk to SiriusMed on WhatsApp just like they talk to friends and family:
+
+* Friendly dose nudges (“Hey Daniel, it’s time for your evening dose of Lisinopril 10 mg. Want to take it now?”)
+* One-tap responses: **Taken**, **Snooze**, **Skip**, **Not feeling well**
+* Voice notes for patients who prefer speaking over typing
+* Follow-up questions handled in natural language: “Can I take this with food?”, “I feel dizzy today.”
+
+**Animation idea:**
+
+* A **live WhatsApp chat mock** scrolls upward:
+
+  * Agent: “Morning Daniel, ready for your Metformin 500 mg?”
+  * Patient taps “Taken ✅”
+  * Agent: “Nice job – that’s 5 days in a row 👏”
+* As each message appears, a small **adherence meter** on the side fills up.
+
+---
+
+### 4.2 Voice Calling
+
+**Subheading:**
+Voice calls: for elders, low literacy, and complex regimens.
+
+**Body:**
+For patients who prefer hearing a voice or can’t read messages easily, SiriusMed makes proactive, natural voice calls:
+
+* Gentle reminders that sound like a supportive nurse, not a robocall
+* Simple yes/no or numeric keypad responses
+* Support for multiple languages and accents
+* Smart retry logic if a call is missed, with fallback to WhatsApp or SMS
+
+**Animation idea:**
+
+* Phone UI with a **waveform** reacting as the “agent” speaks.
+* Subtitles animate:
+
+  * “Hi Mrs. Okafor, it’s time for your blood pressure medication. Did you take it yet?”
+  * Buttons below: “1 – Yes”, “2 – Not yet”, “3 – I’m feeling unwell”.
+
+---
+
+### 4.3 Smart Notifications
+
+**Subheading:**
+Intelligent notifications—not spam.
+
+**Body:**
+SiriusMed doesn’t blast generic alerts.
+Every notification is **timed, contextual, and state-aware**:
+
+* Skips sending if a dose was just confirmed as taken
+* Sends softer language after a tough day (“Let’s try again together”)
+* Bundles multiple meds into a **single, digestible reminder**
+* Pauses nudges when the patient is hospitalized or regimen is changed
+
+**Animation idea:**
+
+* Notification stack slides in from the side.
+* Some cards auto-dismiss with a “✔ Already taken via WhatsApp” tag.
+* Others expand when hovered: showing short explanations, e.g. “New timing after your doctor’s update.”
+
+---
+
+### 4.4 SMS Fallback
+
+**Subheading:**
+SMS: low-data, low-friction backup.
+
+**Body:**
+When data is poor or WhatsApp isn’t available, SiriusMed falls back to **plain SMS**:
+
+* Clean, short, actionable messages
+* Simple reply patterns (“YES”, “NO”, “LATER”, “HELP”)
+* Same adherence engine, different channel
+
+Patients don’t have to remember apps—just reply to a text.
+
+**Animation idea:**
+
+* The screen shows WhatsApp failing (“No data”), then smoothly transitions into an SMS thread keeping the same conversation context.
+* A small **status badge**: “Channel switched: SMS fallback (Queued: 1 → Delivered).”
+
+---
+
+## 5. Patient Journey After Prescription – Storyboard
+
+### 5.1 Day 0 – Prescription Written
+
+**Clinic side:**
+
+* Doctor creates or updates the medication plan.
+* SiriusMed syncs via EMR/FHIR or simple upload.
+
+**Patient side:**
+
+* Before leaving, patient receives a **welcome message**:
+  “Hi Daniel, I’m your SiriusMed assistant. I’ll help you remember your meds and check in on how you’re feeling. We’ll start tonight at 8pm.”
+
+**Animation idea:**
+
+* Timeline starts at **“Day 0 – Clinic”**.
+* A prescription icon morphs into a digital medication plan card.
+* A welcome WhatsApp message animates in on the right.
+
+---
+
+### 5.2 First 48 Hours – Getting Started
+
+**What usually happens without SiriusMed:**
+
+* Patient forgets exact timings or food restrictions
+* Starts late or misses first few doses
+* Hesitates when mild side effects show up
+
+**With SiriusMed:**
+
+* Clear, timed reminders for each new dose
+* Mini-education snippets: “Why this med matters today”
+* Quick symptom check-ins after initial doses
+
+**Animation idea:**
+
+* A **2-day calendar** animates: “Day 1” and “Day 2”.
+* On each time slot (morning/noon/evening), a small icon plays: WhatsApp ping, phone call, SMS bubble.
+* Hovering over a slot reveals the exact message that was sent.
+
+---
+
+### 5.3 Week 2–4 – Building Routine
+
+**Body:**
+Once the initial friction is solved, SiriusMed focuses on **habit-building**:
+
+* Encourages streaks (“You’ve taken your meds 6 mornings in a row 🎉”)
+* Detects drift (“You’re consistently late on evening doses; want to adjust the time?”)
+* Offers flexible scheduling (“Shift worker? Let’s re-align this around your nights.”)
+* Checks in on mood, sleep, and side effects
+
+**Animation idea:**
+
+* A **habit ring / streak counter** fills as the user “takes” doses in the animated chat.
+* A dynamic suggestion pops up: “Looks like 10 PM is tough. Try 9:30 PM instead?” with a “Confirm change” button.
+
+---
+
+### 5.4 Month 3+ – Continuous Health, Not Just Reminders
+
+**Body:**
+Over time, SiriusMed becomes a **longitudinal health companion**:
+
+* Highlights trends: “Your afternoon blood pressure readings improved after we shifted your dose.”
+* Gives clinicians an **adherence timeline with context**, not just a percentage
+* Flags patients quietly slipping: late doses, more “snooze” responses, worrying phrases
+* Helps with refills: “You’re 5 days away from finishing this pack. Should we remind you to refill?”
+
+**Animation idea:**
+
+* Scroll-triggered chart: a line showing **adherence over 3 months**, with annotated events (“dose time changed”, “side effects reported”, “dose paused”).
+* On scroll, specific chat snapshots appear for each event.
+
+---
+
+## 6. For Clinicians – From Blind Spots to Clear Signals
+
+**Headline:**
+You don’t just see “non-adherent.” You see the *why*.
+
+**Body:**
+Inside the clinician dashboard:
+
+* Each patient has a **live adherence score** and trendline
+* Every missed dose has context: “working late”, “felt dizzy”, “ran out of meds”
+* Red-flag phrases trigger alerts and suggested follow-up actions
+* Conversations and dose events are EMR-linked and auditable
+
+SiriusMed turns adherence from a black box into a **manageable, proactive workflow**.
+
+**Animation idea:**
+
+* Split-screen: left shows the patient’s WhatsApp/voice journey, right shows the clinician dashboard auto-updating with each interaction.
+* A missed-dose conversation on the left lights up a “Needs review” tag on the right.
+
+---
+
+## 7. Closing Section – Continuous Health in Every Channel
+
+**Headline:**
+Continuous support, in the channels patients already live in.
+
+**Body:**
+SiriusMed Adherence doesn’t ask patients to change their behavior.
+It meets them in WhatsApp, on the phone, via SMS, and through intelligent notifications—to quietly move them closer to better health, one dose at a time.
+
+For providers, it’s a new layer of visibility and control.
+For patients, it’s the difference between “I’ll try” and “I did it.”
+
+**CTA:**
+
+* **Explore the WhatsApp demo**
+* **Walk through a real patient journey**
+* **Talk to us about integrating with your EMR**
+
+-
