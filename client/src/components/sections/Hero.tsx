@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PhoneFrame } from "@/components/ui/phone-frame";
 import { MessageCircle, Phone, Bell, ArrowRight, Play } from "lucide-react";
-import heroBg from "@assets/generated_images/Abstract_fluid_organic_tech_shape_e8e89436.png";
+import heroBg from "@assets/generated_images/Abstract_fluid_organic_tech_shape_7a3d86d6.png";
 
 const CHANNELS = [
   { id: "whatsapp", label: "WhatsApp", icon: MessageCircle, color: "bg-[#25D366]" },

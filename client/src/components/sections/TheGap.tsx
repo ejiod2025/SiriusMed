@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import chaosImg from "@assets/generated_images/Chaotic_to_ordered_abstract_visualization_f451e8b2.png";
+import chaosImg from "@assets/generated_images/Chaotic_to_ordered_abstract_visualization_842f5617.png";
 
 export default function TheGap() {
   const containerRef = useRef<HTMLDivElement>(null);
