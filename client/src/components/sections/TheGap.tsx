@@ -1,89 +1,111 @@
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import chaosImg from "@assets/generated_images/Chaotic_to_ordered_abstract_visualization_842f5617.png";
+import { motion, useInView } from "framer-motion";
 
 export default function TheGap() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  const xLeft = useTransform(scrollYProgress, [0, 1], [-100, 0]);
-  const xRight = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  
   return (
-    <section ref={containerRef} id="gap" className="py-32 bg-white text-foreground relative overflow-hidden rounded-t-[3rem] -mt-12 z-20 border-t border-border shadow-2xl shadow-black/5">
+    <section ref={containerRef} id="gap" className="py-32 bg-white relative overflow-hidden rounded-t-[3rem] -mt-12 z-20 shadow-2xl shadow-black/5">
       <div className="container mx-auto px-6">
-        <div className="mb-24 text-center">
-            <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-6xl font-heading font-bold mb-6 text-foreground"
-            >
-                The Reality Gap
-            </motion.h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Why "good instructions" fail in the real world.
-            </p>
+        <div className="mb-20 text-center">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-6xl font-heading font-bold mb-6 text-foreground"
+          >
+            The Reality Gap
+          </motion.h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Where typical care falls short, SiriusMed stays constant.
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-           {/* Left: The Clinic (Order) */}
-           <div className="bg-blue-50/50 p-12 md:p-16 rounded-3xl border border-blue-100 relative group overflow-hidden hover:shadow-xl transition-all duration-500">
-                <div className="absolute -right-20 -top-20 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 text-blue-600 font-mono text-xl shadow-sm">01</div>
-                    <h3 className="text-3xl font-bold mb-4 text-blue-900">In the Clinic</h3>
-                    <ul className="space-y-4 text-blue-800/80">
-                        <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                            Perfect clarity
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                            High motivation
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                            "I understand, Doctor."
-                        </li>
-                    </ul>
-                </div>
-           </div>
+        <div className="max-w-5xl mx-auto bg-slate-50 rounded-3xl p-8 md:p-16 border border-slate-100 relative">
+           
+            {/* Chart Container */}
+            <div className="aspect-[16/9] md:aspect-[21/9] relative w-full">
+                
+                {/* Reality Gap Highlight Zone */}
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="absolute left-[25%] w-[30%] top-0 bottom-12 bg-orange-50 border-x border-orange-100/50 flex items-start justify-center pt-8 z-0"
+                >
+                    <span className="text-orange-600/70 font-heading font-bold text-lg md:text-xl uppercase tracking-wide bg-white/80 backdrop-blur px-4 py-1 rounded-full shadow-sm">
+                        Reality Gap
+                    </span>
+                </motion.div>
 
-           {/* Right: The World (Chaos) */}
-           <div className="bg-orange-50/50 p-12 md:p-16 rounded-3xl border border-orange-100 relative group overflow-hidden hover:shadow-xl transition-all duration-500">
-                 <div className="absolute -right-20 -top-20 w-64 h-64 bg-orange-100 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                 <div className="relative z-10">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-6 text-orange-600 font-mono text-xl shadow-sm">02</div>
-                    <h3 className="text-3xl font-bold mb-4 text-orange-900">In the Wild</h3>
-                    <ul className="space-y-4 text-orange-800/80">
-                        <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                            Instructions blur
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                            Side effects cause doubt
-                        </li>
-                        <li className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-orange-500 rounded-full" />
-                            Life takes over
-                        </li>
-                    </ul>
-                 </div>
-           </div>
-        </div>
-        
-        {/* Floating Bridge Concept */}
-        <div className="mt-12 text-center">
-            <motion.div 
-                whileHover={{ scale: 1.05 }}
-                className="inline-block bg-primary text-white px-8 py-3 rounded-full font-bold text-sm tracking-wide uppercase shadow-lg shadow-primary/25 cursor-pointer"
-            >
-                Bridging the Gap
-            </motion.div>
+                {/* Axes */}
+                <div className="absolute left-0 bottom-12 right-0 h-px bg-slate-300" /> {/* X-Axis */}
+                <div className="absolute left-0 top-0 bottom-12 w-px bg-slate-300" /> {/* Y-Axis */}
+
+                {/* X-Axis Labels */}
+                <div className="absolute bottom-0 left-0 text-slate-500 font-bold text-lg md:text-xl">Clinic</div>
+                <div className="absolute bottom-0 right-0 text-slate-500 font-bold text-lg md:text-xl">Between Visits</div>
+
+                {/* Chart Lines (SVG) */}
+                <svg className="absolute inset-0 w-full h-[calc(100%-48px)] overflow-visible z-10">
+                    
+                    {/* Typical Care Line (Gray, drops) */}
+                    <motion.path
+                        d="M0,30 C200,30 250,30 400,250 S800,280 1200,280"
+                        fill="none"
+                        stroke="#94a3b8" // Slate-400
+                        strokeWidth="4"
+                        initial={{ pathLength: 0 }}
+                        animate={isInView ? { pathLength: 1 } : {}}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                        className="md:hidden" // Mobile path (simplified view logic if needed, but using generic viewBox logic is better. For now rely on responsive container)
+                        vectorEffect="non-scaling-stroke"
+                    />
+                    {/* Desktop Path */}
+                     <motion.path
+                        d="M0,20 C250,20 300,20 500,250 S900,280 10000,280" // Extended end for safety
+                        fill="none"
+                        stroke="#94a3b8"
+                        strokeWidth="4"
+                        initial={{ pathLength: 0 }}
+                        animate={isInView ? { pathLength: 1 } : {}}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                        vectorEffect="non-scaling-stroke"
+                    />
+
+                     {/* SiriusMed Line (Blue, consistent) */}
+                     <motion.path
+                        d="M0,20 C300,20 500,20 10000,20"
+                        fill="none"
+                        stroke="var(--color-primary)"
+                        strokeWidth="6"
+                        initial={{ pathLength: 0 }}
+                        animate={isInView ? { pathLength: 1 } : {}}
+                        transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+                        vectorEffect="non-scaling-stroke"
+                    />
+                </svg>
+
+                {/* Labels on Lines */}
+                <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 2.2 }}
+                    className="absolute right-[10%] top-[5%] text-primary font-bold text-2xl md:text-3xl bg-white/80 px-4 py-2 rounded-xl shadow-sm backdrop-blur-sm z-20"
+                >
+                    SiriusMed
+                </motion.div>
+
+                <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 1.8 }}
+                    className="absolute right-[10%] bottom-[15%] text-slate-400 font-bold text-xl md:text-2xl z-20"
+                >
+                    Typical Care
+                </motion.div>
+
+            </div>
         </div>
       </div>
     </section>
