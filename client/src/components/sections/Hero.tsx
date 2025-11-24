@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PhoneFrame } from "@/components/ui/phone-frame";
-import { MessageCircle, Phone, Bell, ArrowRight, Play, MessageSquare } from "lucide-react";
+import { Phone, Bell, ArrowRight, Play } from "lucide-react";
+import { WhatsAppIcon, SMSIcon } from "@/components/ui/custom-icons";
 import heroBg from "@assets/generated_images/Abstract_fluid_organic_tech_shape_7a3d86d6.png";
 
 const CHANNELS = [
-  { id: "whatsapp", label: "WhatsApp", icon: MessageCircle, color: "bg-[#25D366]" },
+  { id: "whatsapp", label: "WhatsApp", icon: WhatsAppIcon, color: "bg-[#25D366]" },
   { id: "call", label: "Voice", icon: Phone, color: "bg-blue-500" },
   { id: "notif", label: "Alerts", icon: Bell, color: "bg-purple-500" },
-  { id: "sms", label: "SMS", icon: MessageSquare, color: "bg-orange-500" },
+  { id: "sms", label: "SMS", icon: SMSIcon, color: "bg-orange-500" },
 ];
 
 export default function Hero() {
