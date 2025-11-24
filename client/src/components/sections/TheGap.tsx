@@ -6,104 +6,123 @@ export default function TheGap() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={containerRef} id="gap" className="py-32 bg-white relative overflow-hidden rounded-t-[3rem] -mt-12 z-20 shadow-2xl shadow-black/5">
+    <section ref={containerRef} id="gap" className="py-24 md:py-32 bg-white relative overflow-hidden rounded-t-[3rem] -mt-12 z-20 shadow-2xl shadow-black/5">
       <div className="container mx-auto px-6">
-        <div className="mb-20 text-center">
+        <div className="mb-16 text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-heading font-bold mb-6 text-foreground"
+            className="text-3xl md:text-5xl font-heading font-bold mb-4 text-foreground"
           >
-            The Reality Gap
+            The Reality Gap After Prescription
           </motion.h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Where typical care falls short, SiriusMed stays constant.
-          </p>
         </div>
 
-        <div className="max-w-5xl mx-auto bg-slate-50 rounded-3xl p-8 md:p-16 border border-slate-100 relative">
+        <div className="max-w-5xl mx-auto bg-white rounded-3xl p-4 md:p-12 border border-slate-100 relative shadow-sm">
            
             {/* Chart Container */}
-            <div className="aspect-[16/9] md:aspect-[21/9] relative w-full">
+            <div className="aspect-[16/10] md:aspect-[2/1] relative w-full select-none">
                 
-                {/* Reality Gap Highlight Zone */}
-                <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ duration: 1, delay: 0.5 }}
-                    className="absolute left-[25%] w-[30%] top-0 bottom-12 bg-orange-50 border-x border-orange-100/50 flex items-start justify-center pt-8 z-0"
-                >
-                    <span className="text-orange-600/70 font-heading font-bold text-lg md:text-xl uppercase tracking-wide bg-white/80 backdrop-blur px-4 py-1 rounded-full shadow-sm">
-                        Reality Gap
-                    </span>
-                </motion.div>
+                {/* Grid Background */}
+                <div className="absolute inset-0 z-0">
+                    {/* Horizontal Grid Lines */}
+                    {[0, 0.2, 0.4, 0.6, 0.8, 1].map((val, i) => (
+                        <div key={i} className="absolute left-0 right-0 border-t border-dashed border-slate-200" style={{ top: `${val * 100}%` }} />
+                    ))}
+                    {/* Vertical Grid Lines */}
+                    {[0, 0.2, 0.4, 0.6, 0.8, 1].map((val, i) => (
+                        <div key={i} className="absolute top-0 bottom-0 border-l border-dashed border-slate-200" style={{ left: `${val * 100}%` }} />
+                    ))}
+                </div>
 
-                {/* Axes */}
-                <div className="absolute left-0 bottom-12 right-0 h-px bg-slate-300" /> {/* X-Axis */}
-                <div className="absolute left-0 top-0 bottom-12 w-px bg-slate-300" /> {/* Y-Axis */}
+                {/* Axes Labels */}
+                <div className="absolute -left-8 md:-left-12 top-1/2 -translate-y-1/2 -rotate-90 text-slate-500 font-medium text-xs md:text-sm whitespace-nowrap">
+                    Perceived support / adherence confidence
+                </div>
+                <div className="absolute bottom-[-2rem] left-1/2 -translate-x-1/2 text-slate-500 font-medium text-xs md:text-sm">
+                    Days after prescription
+                </div>
+                
+                {/* X-Axis Values */}
+                <div className="absolute bottom-[-1.5rem] left-0 w-full flex justify-between text-xs text-slate-400 font-mono">
+                    <span>0</span>
+                    <span>5</span>
+                    <span>10</span>
+                    <span>15</span>
+                    <span>20</span>
+                    <span>25</span>
+                    <span>30</span>
+                </div>
 
-                {/* X-Axis Labels */}
-                <div className="absolute bottom-0 left-0 text-slate-500 font-bold text-lg md:text-xl">Clinic</div>
-                <div className="absolute bottom-0 right-0 text-slate-500 font-bold text-lg md:text-xl">Between Visits</div>
+                {/* Y-Axis Values */}
+                <div className="absolute left-[-1.5rem] top-0 h-full flex flex-col justify-between text-xs text-slate-400 font-mono py-1">
+                    <span>1.0</span>
+                    <span>0.8</span>
+                    <span>0.6</span>
+                    <span>0.4</span>
+                    <span>0.2</span>
+                    <span>0.0</span>
+                </div>
 
-                {/* Chart Lines (SVG) */}
-                <svg className="absolute inset-0 w-full h-[calc(100%-48px)] overflow-visible z-10">
+                {/* Chart SVG */}
+                <svg className="absolute inset-0 w-full h-full overflow-visible z-10" viewBox="0 0 1000 300" preserveAspectRatio="none">
                     
-                    {/* Typical Care Line (Gray, drops) */}
+                    {/* DEFINITIONS */}
+                    <defs>
+                        <linearGradient id="gapGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#fbbf24" stopOpacity="0.1" />
+                        </linearGradient>
+                    </defs>
+
+                    {/* THE GAP (Filled Area) */}
+                    {/* Path logic: Follow SiriusMed Curve -> Line to End of Typical -> Reverse Typical Curve -> Close */}
                     <motion.path
-                        d="M0,30 C200,30 250,30 400,250 S800,280 1200,280"
-                        fill="none"
-                        stroke="#94a3b8" // Slate-400
-                        strokeWidth="4"
-                        initial={{ pathLength: 0 }}
-                        animate={isInView ? { pathLength: 1 } : {}}
-                        transition={{ duration: 2, ease: "easeInOut" }}
-                        className="md:hidden" // Mobile path (simplified view logic if needed, but using generic viewBox logic is better. For now rely on responsive container)
-                        vectorEffect="non-scaling-stroke"
+                        d="M0,45 C200,0 600,80 1000,30 L1000,285 Q300,250 0,30 Z"
+                        fill="url(#gapGradient)"
+                        stroke="none"
+                        initial={{ opacity: 0 }}
+                        animate={isInView ? { opacity: 1 } : {}}
+                        transition={{ duration: 1.5, delay: 0.5 }}
                     />
-                    {/* Desktop Path */}
-                     <motion.path
-                        d="M0,20 C250,20 300,20 500,250 S900,280 10000,280" // Extended end for safety
+
+                    {/* Typical Care Curve (Gold/Orange) */}
+                    <motion.path
+                        d="M0,30 Q300,250 1000,285"
                         fill="none"
-                        stroke="#94a3b8"
-                        strokeWidth="4"
+                        stroke="#d97706" 
+                        strokeWidth="3"
                         initial={{ pathLength: 0 }}
                         animate={isInView ? { pathLength: 1 } : {}}
                         transition={{ duration: 2, ease: "easeInOut" }}
                         vectorEffect="non-scaling-stroke"
                     />
 
-                     {/* SiriusMed Line (Blue, consistent) */}
-                     <motion.path
-                        d="M0,20 C300,20 500,20 10000,20"
+                    {/* SiriusMed Curve (Blue) */}
+                    <motion.path
+                        d="M0,45 C200,0 600,80 1000,30"
                         fill="none"
-                        stroke="var(--color-primary)"
-                        strokeWidth="6"
+                        stroke="#3b82f6" 
+                        strokeWidth="3"
                         initial={{ pathLength: 0 }}
                         animate={isInView ? { pathLength: 1 } : {}}
-                        transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+                        transition={{ duration: 2, ease: "easeInOut" }}
                         vectorEffect="non-scaling-stroke"
                     />
+
                 </svg>
 
-                {/* Labels on Lines */}
-                <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 2.2 }}
-                    className="absolute right-[10%] top-[5%] text-primary font-bold text-2xl md:text-3xl bg-white/80 px-4 py-2 rounded-xl shadow-sm backdrop-blur-sm z-20"
-                >
-                    SiriusMed
-                </motion.div>
-
-                <motion.div 
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 1.8 }}
-                    className="absolute right-[10%] bottom-[15%] text-slate-400 font-bold text-xl md:text-2xl z-20"
-                >
-                    Typical Care
-                </motion.div>
+                {/* Legend */}
+                <div className="absolute top-4 right-4 md:right-8 bg-white/90 backdrop-blur px-4 py-3 rounded-xl border border-slate-200 shadow-sm text-xs md:text-sm z-20">
+                    <div className="flex items-center gap-2 mb-2">
+                        <div className="w-4 h-0.5 bg-amber-600" />
+                        <span className="text-slate-600">Typical care: support after prescription</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-4 h-0.5 bg-blue-500" />
+                        <span className="text-slate-900 font-semibold">With SiriusMed: continuous support</span>
+                    </div>
+                </div>
 
             </div>
         </div>
