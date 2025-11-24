@@ -1,8 +1,183 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Phone, Bell, MessageSquare, Activity, Battery, Signal, Wifi } from "lucide-react";
+import { MessageCircle, Phone, Bell, Signal, Wifi, Battery, Check, ArrowLeft, Video, MoreVertical, Mic, Plus, Camera } from "lucide-react";
 import { PhoneFrame } from "@/components/ui/phone-frame";
 import { cn } from "@/lib/utils";
+
+// --- Mock Data & Assets ---
+
+const WHATSAPP_SCRIPT = [
+  { type: "agent", text: "Hi Daniel Alex! Good afternoon. Hope you're doing well. How are you feeling today?", delay: 1000 },
+  { type: "user", text: "I am good. You?", delay: 2500 },
+  { type: "agent", text: "Glad to hear that, Daniel Alex. As an AI, I don't have personal feelings, but I'm here to support your health journey. How are you feeling overall today?\n\nBy the way, your afternoon dose today is Metformin 500 mg. When you've taken it, just reply YES here.", delay: 4000 },
+  { type: "user", text: "I have thanks", delay: 6000 },
+  { type: "agent", text: "Thank you for confirming you've taken your Metformin. How are you feeling overall today, Daniel Alex?", delay: 7500 },
+  { type: "user", text: "Good good", delay: 9000 },
+  { type: "agent", text: "That's good to hear, Daniel. Is there anything else I can help you with today?", delay: 10500 },
+  { type: "user", text: "None for now", delay: 12000 },
+  { type: "agent", text: "Okay, Daniel. Feel free to reach out if you have any questions or concerns later. Have a good day.", delay: 13500 },
+];
+
+// --- Components ---
+
+const WhatsAppSimulation = () => {
+  const [messages, setMessages] = useState<any[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let timeoutIds: NodeJS.Timeout[] = [];
+    let currentTime = 0;
+
+    // Reset
+    setMessages([]);
+
+    WHATSAPP_SCRIPT.forEach((msg, index) => {
+      // 1. Show typing indicator before message (if agent)
+      //    For user, we can just "appear" or show typing too. Let's show typing for both for "realism"
+      const typingStart = currentTime;
+      const messageAppear = currentTime + 1500; // Typing takes 1.5s
+
+      // Start Typing
+      timeoutIds.push(setTimeout(() => {
+        setIsTyping(true);
+        // Scroll to bottom when typing starts
+        if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }, typingStart));
+
+      // Stop Typing & Show Message
+      timeoutIds.push(setTimeout(() => {
+        setIsTyping(false);
+        setMessages(prev => [...prev, msg]);
+        // Scroll to bottom when message appears
+        if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }, messageAppear));
+
+      // Set next start time (message delay + typing duration)
+      currentTime = messageAppear + (index < WHATSAPP_SCRIPT.length - 1 ? 1000 : 0); 
+    });
+
+    return () => timeoutIds.forEach(clearTimeout);
+  }, []);
+
+  useEffect(() => {
+     if (scrollRef.current) {
+         scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+     }
+  }, [messages, isTyping]);
+
+  return (
+    <div className="h-full flex flex-col bg-[#E5DDD5] font-sans text-sm relative overflow-hidden">
+        {/* Status Bar */}
+        <div className="bg-[#054D44] text-white px-6 py-3 flex justify-between items-center text-xs font-medium z-20">
+            <span>3:09</span>
+            <div className="flex gap-2 items-center">
+            <Signal size={14} />
+            <Wifi size={14} />
+            <Battery size={14} />
+            </div>
+        </div>
+
+        {/* Header */}
+        <div className="bg-[#075E54] px-2 py-2 flex items-center gap-2 shadow-md z-20 text-white">
+            <ArrowLeft size={20} />
+            <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold border border-white/20">
+                VB
+            </div>
+            <div className="flex-1 min-w-0">
+                <div className="font-bold text-sm truncate">VB</div>
+                <div className="text-[10px] text-white/80 truncate">
+                    {isTyping ? "typing..." : "voicebreeze"}
+                </div>
+            </div>
+            <div className="flex gap-4 pr-2">
+                <Video size={20} />
+                <Phone size={20} />
+                <MoreVertical size={20} />
+            </div>
+        </div>
+        
+        {/* Chat Area */}
+        <div 
+            ref={scrollRef}
+            className="flex-1 p-4 space-y-2 overflow-y-auto bg-[#E5DDD5] bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat"
+        >
+            <div className="flex justify-center my-4">
+                <span className="bg-[#E1F3FB] text-gray-800 text-[10px] px-2 py-1 rounded-md shadow-sm uppercase font-medium">
+                    Today
+                </span>
+            </div>
+
+            <AnimatePresence initial={false}>
+                {messages.map((msg, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        className={cn(
+                            "max-w-[85%] p-2 rounded-lg text-[13px] leading-snug shadow-sm relative pb-5",
+                            msg.type === "agent" 
+                                ? "bg-white self-start rounded-tl-none mr-auto" 
+                                : "bg-[#DCF8C6] self-end rounded-tr-none ml-auto"
+                        )}
+                    >
+                        {msg.text.split('\n').map((line: string, l: number) => (
+                             <p key={l} className={l > 0 ? "mt-2" : ""}>{line}</p>
+                        ))}
+                        <div className="absolute right-2 bottom-1 flex items-center gap-1">
+                             <span className="text-[10px] text-gray-500">
+                                2:0{Math.floor(i/2)} PM
+                             </span>
+                             {msg.type === "user" && (
+                                <div className="flex">
+                                     <Check size={12} className="text-[#34B7F1]" />
+                                     <Check size={12} className="text-[#34B7F1] -ml-[8px]" />
+                                </div>
+                             )}
+                        </div>
+                    </motion.div>
+                ))}
+            </AnimatePresence>
+
+            {isTyping && (
+                <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white p-3 rounded-lg rounded-tl-none self-start max-w-[85%] mr-auto shadow-sm w-16"
+                >
+                    <div className="flex gap-1 justify-center">
+                        <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0 }} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+                        <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+                        <motion.div animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} className="w-1.5 h-1.5 bg-gray-400 rounded-full" />
+                    </div>
+                </motion.div>
+            )}
+        </div>
+        
+        {/* Input Area */}
+        <div className="p-2 bg-[#F0F0F0] flex items-center gap-2 pb-6 z-20">
+           <div className="bg-white flex-1 rounded-full h-10 px-4 flex items-center gap-2 shadow-sm">
+               <div className="text-gray-400">
+                   <Plus size={20} className="rotate-45" />
+               </div>
+               <input 
+                 disabled 
+                 className="flex-1 bg-transparent border-none outline-none text-sm placeholder:text-gray-400"
+                 placeholder="Message"
+               />
+               <div className="flex gap-3 text-gray-400">
+                   <Camera size={20} />
+               </div>
+           </div>
+           <div className="w-10 h-10 rounded-full bg-[#005C4B] flex items-center justify-center text-white shadow-sm">
+               <Mic size={20} />
+           </div>
+        </div>
+    </div>
+  );
+};
+
+// --- Main Component ---
 
 const FEATURES = [
   {
@@ -11,104 +186,7 @@ const FEATURES = [
     color: "bg-[#25D366]",
     title: "WhatsApp",
     desc: "Natural chat interface.",
-    mock: (
-        <div className="h-full flex flex-col bg-[#0F1C24] font-sans text-sm text-white">
-             {/* Status Bar */}
-             <div className="px-6 py-3 flex justify-between items-center text-xs font-medium">
-                 <span>3:09</span>
-                 <div className="flex gap-2 items-center">
-                    <Signal size={14} />
-                    <Wifi size={14} />
-                    <Battery size={14} />
-                 </div>
-             </div>
-
-             {/* Header */}
-             <div className="bg-[#0F1C24] px-4 py-2 flex items-center gap-4 border-b border-gray-800">
-                 <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold">
-                    VB
-                 </div>
-                 <div>
-                    <div className="font-bold text-base">VB</div>
-                    <div className="text-xs text-gray-400">voicebreeze</div>
-                 </div>
-             </div>
-             
-             {/* Chat Area */}
-             <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-[#0b141a] bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-opacity-5">
-                 {/* Agent Message 1 */}
-                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
-                    Hi Daniel Alex! Good afternoon. Hope you're doing well. How are you feeling today?
-                    <div className="text-[10px] text-gray-400 text-right mt-1">1:59 PM</div>
-                 </div>
-
-                 {/* User Message 1 */}
-                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
-                    I am You?
-                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
-                        1:59 PM <span className="text-blue-300">✓✓</span>
-                    </div>
-                 </div>
-
-                 {/* Agent Message 2 - Long */}
-                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
-                    <p className="mb-3">Glad to hear that, Daniel Alex. As an AI, I don't have personal feelings, but I'm here to support your health journey. How are you feeling overall today?</p>
-                    <p>By the way, your afternoon dose today is Metformin 500 mg. When you've taken it, just reply YES here.</p>
-                    <div className="text-[10px] text-gray-400 text-right mt-1">1:59 PM</div>
-                 </div>
-
-                 {/* User Message 2 */}
-                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
-                    I have thanks
-                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
-                        2:00 PM <span className="text-blue-300">✓✓</span>
-                    </div>
-                 </div>
-
-                 {/* Agent Message 3 */}
-                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
-                    Thank you for confirming you've taken your Metformin. How are you feeling overall today, Daniel Alex?
-                    <div className="text-[10px] text-gray-400 text-right mt-1">2:00 PM</div>
-                 </div>
-
-                 {/* User Message 3 */}
-                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
-                    Good good
-                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
-                        2:00 PM <span className="text-blue-300">✓✓</span>
-                    </div>
-                 </div>
-
-                 {/* Agent Message 4 */}
-                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
-                    That's good to hear, Daniel. Is there anything else I can help you with today?
-                    <div className="text-[10px] text-gray-400 text-right mt-1">2:00 PM</div>
-                 </div>
-
-                 {/* User Message 4 */}
-                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
-                    None for now
-                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
-                        2:00 PM <span className="text-blue-300">✓✓</span>
-                    </div>
-                 </div>
-
-                 {/* Agent Message 5 */}
-                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
-                    Okay, Daniel. Feel free to reach out if you have any questions or concerns later. Have a good day.
-                    <div className="text-[10px] text-gray-400 text-right mt-1">2:00 PM</div>
-                 </div>
-             </div>
-             
-             {/* Input Area */}
-             <div className="p-2 bg-[#1F2C34] flex items-center gap-2 pb-6">
-                <div className="flex-1 bg-[#2A3942] rounded-full h-10 px-4 text-gray-400 flex items-center text-sm">Message</div>
-                <div className="w-10 h-10 rounded-full bg-[#005C4B] flex items-center justify-center text-white">
-                    <MessageCircle size={20} />
-                </div>
-             </div>
-        </div>
-    )
+    component: <WhatsAppSimulation />
   },
   {
     id: "voice",
@@ -116,7 +194,7 @@ const FEATURES = [
     color: "bg-blue-500",
     title: "Voice AI",
     desc: "For complex care needs.",
-    mock: (
+    component: (
         <div className="h-full flex flex-col bg-gray-900 text-white items-center justify-center relative overflow-hidden">
              <div className="absolute inset-0 bg-blue-900/20" />
              <div className="z-10 flex flex-col items-center">
@@ -144,7 +222,7 @@ const FEATURES = [
     color: "bg-purple-500",
     title: "Smart Alerts",
     desc: "Context-aware nudges.",
-    mock: (
+    component: (
         <div className="h-full bg-gray-50 pt-20 px-6 relative">
              <motion.div 
                 initial={{ y: 20, opacity: 0 }}
@@ -234,7 +312,7 @@ export default function MultiChannel() {
                             transition={{ duration: 0.2 }}
                             className="h-full w-full bg-white"
                         >
-                            {FEATURES[activeTab].mock}
+                            {FEATURES[activeTab].component}
                         </motion.div>
                     </AnimatePresence>
                 </PhoneFrame>
