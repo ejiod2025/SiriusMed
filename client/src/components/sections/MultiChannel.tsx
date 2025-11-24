@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Phone, Bell, MessageSquare, Activity } from "lucide-react";
+import { MessageCircle, Phone, Bell, MessageSquare, Activity, Battery, Signal, Wifi } from "lucide-react";
 import { PhoneFrame } from "@/components/ui/phone-frame";
 import { cn } from "@/lib/utils";
 
@@ -12,17 +12,100 @@ const FEATURES = [
     title: "WhatsApp",
     desc: "Natural chat interface.",
     mock: (
-        <div className="h-full flex flex-col bg-[#E5DDD5] font-sans text-sm">
-             <div className="bg-[#075E54] p-4 text-white font-bold flex items-center gap-2 shadow-md">
-                 <MessageCircle size={18} /> SiriusMed
+        <div className="h-full flex flex-col bg-[#0F1C24] font-sans text-sm text-white">
+             {/* Status Bar */}
+             <div className="px-6 py-3 flex justify-between items-center text-xs font-medium">
+                 <span>3:09</span>
+                 <div className="flex gap-2 items-center">
+                    <Signal size={14} />
+                    <Wifi size={14} />
+                    <Battery size={14} />
+                 </div>
              </div>
-             <div className="flex-1 p-4 space-y-4 overflow-hidden bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]">
-                 <div className="bg-white p-3 rounded-lg shadow-sm self-start max-w-[85%] rounded-tl-none">
-                    Hey Daniel, time for your Metformin. 💊
+
+             {/* Header */}
+             <div className="bg-[#0F1C24] px-4 py-2 flex items-center gap-4 border-b border-gray-800">
+                 <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-sm font-bold">
+                    VB
                  </div>
-                 <div className="bg-[#DCF8C6] p-3 rounded-lg shadow-sm self-end max-w-[85%] ml-auto rounded-tr-none">
-                    Taken ✅
+                 <div>
+                    <div className="font-bold text-base">VB</div>
+                    <div className="text-xs text-gray-400">voicebreeze</div>
                  </div>
+             </div>
+             
+             {/* Chat Area */}
+             <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-[#0b141a] bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-opacity-5">
+                 {/* Agent Message 1 */}
+                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
+                    Hi Daniel Alex! Good afternoon. Hope you're doing well. How are you feeling today?
+                    <div className="text-[10px] text-gray-400 text-right mt-1">1:59 PM</div>
+                 </div>
+
+                 {/* User Message 1 */}
+                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
+                    I am You?
+                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
+                        1:59 PM <span className="text-blue-300">✓✓</span>
+                    </div>
+                 </div>
+
+                 {/* Agent Message 2 - Long */}
+                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
+                    <p className="mb-3">Glad to hear that, Daniel Alex. As an AI, I don't have personal feelings, but I'm here to support your health journey. How are you feeling overall today?</p>
+                    <p>By the way, your afternoon dose today is Metformin 500 mg. When you've taken it, just reply YES here.</p>
+                    <div className="text-[10px] text-gray-400 text-right mt-1">1:59 PM</div>
+                 </div>
+
+                 {/* User Message 2 */}
+                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
+                    I have thanks
+                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
+                        2:00 PM <span className="text-blue-300">✓✓</span>
+                    </div>
+                 </div>
+
+                 {/* Agent Message 3 */}
+                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
+                    Thank you for confirming you've taken your Metformin. How are you feeling overall today, Daniel Alex?
+                    <div className="text-[10px] text-gray-400 text-right mt-1">2:00 PM</div>
+                 </div>
+
+                 {/* User Message 3 */}
+                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
+                    Good good
+                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
+                        2:00 PM <span className="text-blue-300">✓✓</span>
+                    </div>
+                 </div>
+
+                 {/* Agent Message 4 */}
+                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
+                    That's good to hear, Daniel. Is there anything else I can help you with today?
+                    <div className="text-[10px] text-gray-400 text-right mt-1">2:00 PM</div>
+                 </div>
+
+                 {/* User Message 4 */}
+                 <div className="bg-[#005C4B] p-3 rounded-xl rounded-tr-none self-end max-w-[85%] ml-auto text-[13px] leading-relaxed shadow-sm">
+                    None for now
+                    <div className="text-[10px] text-green-200 text-right mt-1 flex justify-end items-center gap-1">
+                        2:00 PM <span className="text-blue-300">✓✓</span>
+                    </div>
+                 </div>
+
+                 {/* Agent Message 5 */}
+                 <div className="bg-[#1F2C34] p-3 rounded-xl rounded-tl-none self-start max-w-[85%] text-[13px] leading-relaxed shadow-sm">
+                    Okay, Daniel. Feel free to reach out if you have any questions or concerns later. Have a good day.
+                    <div className="text-[10px] text-gray-400 text-right mt-1">2:00 PM</div>
+                 </div>
+             </div>
+             
+             {/* Input Area */}
+             <div className="p-2 bg-[#1F2C34] flex items-center gap-2 pb-6">
+                <div className="flex-1 bg-[#2A3942] rounded-full h-10 px-4 text-gray-400 flex items-center text-sm">Message</div>
+                <div className="w-10 h-10 rounded-full bg-[#005C4B] flex items-center justify-center text-white">
+                    <MessageCircle size={20} />
+                </div>
              </div>
         </div>
     )
