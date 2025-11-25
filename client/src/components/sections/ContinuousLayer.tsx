@@ -98,7 +98,7 @@ export default function ContinuousLayer() {
 
             {/* Engage to Adapt */}
             <motion.path
-              d="M 150,280 Q 300,300 450,280"
+              d="M 150,250 Q 300,280 450,250"
               fill="none"
               stroke="url(#lineGradient)"
               strokeWidth="3"
