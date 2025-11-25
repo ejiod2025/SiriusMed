@@ -82,12 +82,12 @@ const WhatsAppSimulation = () => {
         <div className="bg-[#075E54] px-2 py-2 flex items-center gap-2 shadow-md z-20 text-white">
             <ArrowLeft size={20} />
             <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold border border-white/20">
-                VB
+                SiriusMed
             </div>
             <div className="flex-1 min-w-0">
-                <div className="font-bold text-sm truncate">VB</div>
+                <div className="font-bold text-sm truncate">SiriusMed</div>
                 <div className="text-[10px] text-white/80 truncate">
-                    {isTyping ? "typing..." : "voicebreeze"}
+                    {isTyping ? "typing..." : "siriusmed"}
                 </div>
             </div>
             <div className="flex gap-4 pr-2">
