@@ -3,51 +3,6 @@ import { motion } from "framer-motion";
 import { Pill, MessageCircle, Users, Frown, Calendar } from "lucide-react";
 
 export default function ContinuousLayer() {
-  const stages = [
-    {
-      id: "translate",
-      icon: Pill,
-      title: "Translate",
-      description: "Start point at clinic",
-      position: "left",
-    },
-    {
-      id: "guide",
-      icon: MessageCircle,
-      title: "Guide",
-      description: "Med guidance during busy days",
-      position: "right",
-    },
-    {
-      id: "engage",
-      icon: Users,
-      title: "Engage",
-      description: "Patient enters real-life environment",
-      position: "left",
-    },
-    {
-      id: "monitor",
-      icon: Frown,
-      title: "Monitor",
-      description: "Icons showing side-effect and symptom capture",
-      position: "right",
-    },
-    {
-      id: "adapt",
-      icon: Frown,
-      title: "Adapt",
-      description: "Icons showing side-effect, and symptom capture",
-      position: "left",
-    },
-    {
-      id: "appointment",
-      icon: Calendar,
-      title: "Next Appointment",
-      description: "",
-      position: "right",
-    },
-  ];
-
   return (
     <section className="py-24 md:py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative">
       <div className="container mx-auto px-6 relative z-10">
@@ -62,114 +17,161 @@ export default function ContinuousLayer() {
           </motion.h2>
         </div>
 
-        {/* Journey Flow - Wider Container */}
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative" style={{ minHeight: '900px' }}>
-            {/* Winding Path SVG */}
-            <svg 
-              className="absolute left-1/2 -translate-x-1/2 top-0 w-full h-full pointer-events-none z-0" 
-              viewBox="0 0 400 900" 
-              preserveAspectRatio="xMidYMid meet"
+        {/* Wide Container for Journey */}
+        <div className="relative max-w-5xl mx-auto">
+          <svg 
+            viewBox="0 0 800 1000" 
+            className="w-full h-auto"
+            style={{ maxHeight: '1000px' }}
+          >
+            <defs>
+              <linearGradient id="pathGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="#60a5fa" />
+                <stop offset="50%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#6366f1" />
+              </linearGradient>
+            </defs>
+
+            {/* Main S-Curve Path */}
+            <motion.path
+              d="M 200,950 Q 150,850 200,750 Q 250,650 450,600 Q 650,550 600,400 Q 550,250 300,200 Q 150,150 250,50"
+              fill="none"
+              stroke="url(#pathGradient)"
+              strokeWidth="16"
+              strokeLinecap="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 3, ease: "easeInOut" }}
+            />
+
+            {/* Translate - Bottom (200, 950) */}
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 150 }}
             >
-              <defs>
-                <linearGradient id="pathGradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                  <stop offset="0%" stopColor="#60a5fa" />
-                  <stop offset="50%" stopColor="#3b82f6" />
-                  <stop offset="100%" stopColor="#6366f1" />
-                </linearGradient>
-              </defs>
+              <circle cx="200" cy="950" r="45" fill="#6366f1" />
+              <foreignObject x="155" y="905" width="90" height="90">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Pill className="w-10 h-10 text-white" strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+              <foreignObject x="10" y="920" width="180" height="80">
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Translate</h3>
+                  <p className="text-sm text-gray-600">Start point at clinic</p>
+                </div>
+              </foreignObject>
+            </motion.g>
 
-              {/* Winding path from bottom to top */}
-              <motion.path
-                d="M 120,900 Q 120,820 120,750 Q 120,680 200,630 Q 280,580 280,500 Q 280,420 120,370 Q 40,340 120,250 Q 200,160 280,150 Q 340,140 320,80 L 320,0"
-                fill="none"
-                stroke="url(#pathGradient)"
-                strokeWidth="12"
-                strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 3, ease: "easeInOut" }}
-              />
-            </svg>
-
-            {/* Stage Nodes */}
-            {stages.map((stage, index) => {
-              const Icon = stage.icon;
-              const positions = [
-                { bottom: '0%', left: '10%' },      // Translate
-                { bottom: '17%', right: '15%' },    // Guide
-                { bottom: '34%', left: '5%' },      // Engage
-                { bottom: '51%', right: '10%' },    // Monitor
-                { bottom: '68%', left: '10%' },     // Adapt
-                { bottom: '85%', right: '15%' },    // Next Appointment
-              ];
-
-              return (
-                <motion.div
-                  key={stage.id}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    delay: 0.5 + index * 0.2, 
-                    type: "spring", 
-                    stiffness: 200,
-                    damping: 15
-                  }}
-                  className="absolute z-20"
-                  style={positions[index]}
-                >
-                  <div className={`flex ${stage.position === 'right' ? 'flex-row-reverse' : 'flex-row'} items-center gap-4 max-w-sm`}>
-                    {/* Icon Circle */}
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-xl"
-                    >
-                      <Icon className="w-8 h-8 md:w-10 md:h-10 text-white" strokeWidth={2.5} />
-                    </motion.div>
-
-                    {/* Text Content */}
-                    <div className={`${stage.position === 'right' ? 'text-right' : 'text-left'}`}>
-                      <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{stage.title}</h3>
-                      {stage.description && (
-                        <p className="text-sm md:text-base text-gray-600 leading-relaxed">{stage.description}</p>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-
-            {/* Decorative Elements */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.1 }}
+            {/* Guide - (200, 750) */}
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-3xl"
-            />
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.1 }}
+              transition={{ delay: 0.7, type: "spring", stiffness: 150 }}
+            >
+              <circle cx="200" cy="750" r="45" fill="#6366f1" />
+              <foreignObject x="155" y="705" width="90" height="90">
+                <div className="flex items-center justify-center w-full h-full">
+                  <MessageCircle className="w-10 h-10 text-white" strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+              <foreignObject x="260" y="720" width="200" height="80">
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Guide</h3>
+                  <p className="text-sm text-gray-600">Med guidance during busy days</p>
+                </div>
+              </foreignObject>
+            </motion.g>
+
+            {/* Engage - (450, 600) */}
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="absolute bottom-0 left-0 w-64 h-64 bg-secondary rounded-full blur-3xl"
-            />
-          </div>
+              transition={{ delay: 0.9, type: "spring", stiffness: 150 }}
+            >
+              <circle cx="450" cy="600" r="45" fill="#6366f1" />
+              <foreignObject x="405" y="555" width="90" height="90">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Users className="w-10 h-10 text-white" strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+              <foreignObject x="200" y="570" width="240" height="80">
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Engage</h3>
+                  <p className="text-sm text-gray-600">Patient enters real-life environment</p>
+                </div>
+              </foreignObject>
+            </motion.g>
+
+            {/* Monitor - (600, 400) */}
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.1, type: "spring", stiffness: 150 }}
+            >
+              <circle cx="600" cy="400" r="45" fill="#6366f1" />
+              <foreignObject x="555" y="355" width="90" height="90">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Frown className="w-10 h-10 text-white" strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+              <foreignObject x="510" y="370" width="280" height="80">
+                <div className="text-right">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Monitor</h3>
+                  <p className="text-sm text-gray-600">Icons showing side-effect and symptom capture</p>
+                </div>
+              </foreignObject>
+            </motion.g>
+
+            {/* Adapt - (300, 200) */}
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.3, type: "spring", stiffness: 150 }}
+            >
+              <circle cx="300" cy="200" r="45" fill="#6366f1" />
+              <foreignObject x="255" y="155" width="90" height="90">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Frown className="w-10 h-10 text-white" strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+              <foreignObject x="10" y="170" width="240" height="80">
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Adapt</h3>
+                  <p className="text-sm text-gray-600">Icons showing side-effect, and symptom capture</p>
+                </div>
+              </foreignObject>
+            </motion.g>
+
+            {/* Next Appointment - (250, 50) */}
+            <motion.g
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.5, type: "spring", stiffness: 150 }}
+            >
+              <rect x="205" y="5" width="90" height="90" rx="20" fill="#6366f1" />
+              <foreignObject x="205" y="5" width="90" height="90">
+                <div className="flex items-center justify-center w-full h-full">
+                  <Calendar className="w-10 h-10 text-white" strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+              <foreignObject x="310" y="20" width="200" height="80">
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">Next</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Appointment</h3>
+                </div>
+              </foreignObject>
+            </motion.g>
+          </svg>
         </div>
-
-        {/* Bottom Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 1.5 }}
-          className="mt-20 text-center max-w-3xl mx-auto"
-        >
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-            From prescription to appointment, SiriusMed creates a continuous bridge of support, 
-            <span className="font-semibold text-primary"> adapting to life's realities along the way.</span>
-          </p>
-        </motion.div>
       </div>
     </section>
   );
