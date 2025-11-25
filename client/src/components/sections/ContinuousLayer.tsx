@@ -121,8 +121,8 @@ export default function ContinuousLayer() {
                   <Frown className="w-10 h-10 text-white" strokeWidth={2.5} />
                 </div>
               </foreignObject>
-              <foreignObject x="460" y="360" width="330" height="120">
-                <div className="text-right pr-4">
+              <foreignObject x="420" y="350" width="370" height="140">
+                <div className="text-right px-4 py-2">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">Monitor</h3>
                   <p className="text-sm text-gray-600 leading-relaxed">Side-effect and symptom capture</p>
                 </div>
