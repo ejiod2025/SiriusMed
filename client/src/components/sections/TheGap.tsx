@@ -10,21 +10,21 @@ export default function TheGap() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   const floatingIcons = [
-    { Icon: Mail, position: { top: '15%', left: '25%' }, delay: 0 },
-    { Icon: MessageSquare, position: { top: '10%', left: '45%' }, delay: 0.1 },
-    { Icon: Clock, position: { top: '20%', left: '60%' }, delay: 0.2 },
-    { Icon: Calendar, position: { top: '25%', right: '20%' }, delay: 0.3 },
-    { Icon: CheckSquare, position: { bottom: '40%', left: '30%' }, delay: 0.4 },
-    { Icon: FileText, position: { bottom: '45%', left: '50%' }, delay: 0.5 },
-    { Icon: AlertTriangle, position: { top: '18%', right: '15%' }, delay: 0.6 },
-    { Icon: Info, position: { bottom: '35%', right: '25%' }, delay: 0.7 },
+    { Icon: Mail, position: { top: '5%', left: '35%' }, delay: 0 },
+    { Icon: MessageSquare, position: { top: '8%', left: '48%' }, delay: 0.1 },
+    { Icon: Clock, position: { top: '12%', left: '62%' }, delay: 0.2 },
+    { Icon: Calendar, position: { top: '15%', right: '28%' }, delay: 0.3 },
+    { Icon: CheckSquare, position: { top: '30%', left: '32%' }, delay: 0.4 },
+    { Icon: FileText, position: { top: '28%', left: '50%' }, delay: 0.5 },
+    { Icon: AlertTriangle, position: { top: '10%', right: '22%' }, delay: 0.6 },
+    { Icon: Info, position: { top: '32%', right: '30%' }, delay: 0.7 },
   ];
 
   return (
     <section ref={containerRef} id="gap" className="py-24 md:py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="mb-20 text-center">
+        <div className="mb-16 text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -34,26 +34,26 @@ export default function TheGap() {
           </motion.h2>
         </div>
 
-        {/* Main Visual */}
+        {/* Main Visual Container */}
         <div className="relative max-w-7xl mx-auto">
           {/* Three Text Headers */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 relative z-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 relative z-20">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-center"
             >
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Clinic Visit</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800">Clinic Visit</h3>
             </motion.div>
             
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-center"
+              className="text-center px-4"
             >
-              <h3 className="text-xl md:text-2xl font-semibold text-gray-700 leading-tight">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-700 leading-tight">
                 Real life quickly overwhelms<br/>medical advice
               </h3>
             </motion.div>
@@ -64,150 +64,180 @@ export default function TheGap() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-center"
             >
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Next Appointment</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800">Next Appointment</h3>
             </motion.div>
           </div>
 
-          {/* Bridge and Characters Container */}
-          <div className="relative h-[500px] md:h-[600px]">
-            {/* Bridge Path - Left Side (Solid) */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="absolute left-0 top-1/2 w-[35%] h-3 bg-[#5a7fa5] origin-left"
-              style={{ transform: 'translateY(-50%)' }}
-            />
-
-            {/* Bridge Path - Breaking Point */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="absolute left-[35%] top-1/2 w-[15%] h-3 bg-gradient-to-r from-[#5a7fa5] via-[#7a95b5] to-transparent origin-left"
-              style={{ transform: 'translateY(-50%) rotate(-5deg)', transformOrigin: 'left center' }}
-            />
-
-            {/* Bridge Path - Right Side (Ascending) */}
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={isInView ? { scaleX: 1 } : {}}
-              transition={{ duration: 1, delay: 1.2 }}
-              className="absolute right-0 top-[35%] w-[35%] h-3 bg-[#5a7fa5] origin-right"
-              style={{ transform: 'rotate(-8deg)', transformOrigin: 'right center' }}
-            />
-
-            {/* Reality Gap Chasm */}
-            <motion.div
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
-              transition={{ duration: 1, delay: 1.3 }}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 w-[300px] h-[250px] origin-top"
-            >
-              <div className="relative w-full h-full">
-                {/* Chasm Shape */}
-                <div className="absolute inset-0 bg-gradient-to-b from-red-400/80 via-red-500/60 to-red-600/40 rounded-b-[50%] blur-xl" />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-400/50 to-red-500/70 rounded-b-[50%]" />
+          {/* SVG Container with Path and Characters */}
+          <div className="relative w-full" style={{ height: '600px' }}>
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                {/* Path definition for character animation */}
+                <path 
+                  id="bridgePath" 
+                  d="M 50,350 L 380,350 Q 420,355 450,360 L 490,370 Q 520,378 550,395 Q 580,412 650,430 L 1150,550" 
+                />
                 
-                {/* "REALITY GAP" Text */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10">
-                  <p className="text-white font-bold text-2xl md:text-3xl tracking-widest drop-shadow-lg">
-                    REALITY GAP
-                  </p>
-                </div>
+                {/* Gradient for gap */}
+                <linearGradient id="gapFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#ef4444" stopOpacity="0.7" />
+                  <stop offset="50%" stopColor="#dc2626" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#b91c1c" stopOpacity="0.3" />
+                </linearGradient>
+              </defs>
 
-                {/* Cracks */}
-                <svg className="absolute -top-4 left-1/2 -translate-x-1/2 w-64 h-16" viewBox="0 0 200 40">
-                  <path 
-                    d="M0,20 L50,15 L55,22 L60,18 L70,20 L100,20 L130,18 L140,22 L145,15 L200,20" 
-                    stroke="#374151" 
-                    strokeWidth="2" 
-                    fill="none"
-                    strokeDasharray="4 4"
-                  />
-                  <path 
-                    d="M80,20 L85,30 M120,20 L115,28" 
-                    stroke="#374151" 
-                    strokeWidth="1.5" 
-                    fill="none"
-                  />
-                </svg>
-              </div>
-            </motion.div>
+              {/* Bridge Path - Main Line */}
+              <motion.path
+                d="M 50,350 L 380,350 Q 420,355 450,360 L 490,370 Q 520,378 550,395 Q 580,412 650,430 L 1150,550"
+                fill="none"
+                stroke="#5a7fa5"
+                strokeWidth="8"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={isInView ? { pathLength: 1 } : {}}
+                transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+              />
 
-            {/* Character 1: Doctor & Patient (Left) */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="absolute left-[5%] top-[20%] w-[280px]"
-            >
-              <div className="bg-blue-50/80 rounded-3xl p-6 backdrop-blur-sm border border-blue-100 shadow-xl">
-                <img src={doctorPatient} alt="Doctor consulting patient" className="w-full h-auto rounded-2xl" />
-              </div>
-            </motion.div>
+              {/* Crack marks at breaking point */}
+              <motion.g
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 2 }}
+              >
+                <path d="M 420,345 L 415,365 M 440,348 L 435,370 M 460,352 L 458,375" stroke="#374151" strokeWidth="2" strokeDasharray="3 3" />
+                <path d="M 480,362 L 478,385 M 500,368 L 495,388" stroke="#374151" strokeWidth="2" strokeDasharray="3 3" />
+              </motion.g>
 
-            {/* Character 2: Overwhelmed Person (Center) */}
+              {/* Reality Gap Chasm */}
+              <motion.path
+                d="M 420,360 Q 450,380 480,420 Q 500,450 520,500 Q 540,550 520,580 Q 500,600 460,600 L 400,600 Q 380,580 400,520 Q 415,460 420,400 Z"
+                fill="url(#gapFill)"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
+                transition={{ duration: 1, delay: 2.2 }}
+                style={{ transformOrigin: '450px 360px' }}
+              />
+              
+              {/* "REALITY GAP" Text */}
+              <motion.text
+                x="420"
+                y="520"
+                fill="white"
+                fontSize="32"
+                fontWeight="bold"
+                letterSpacing="4"
+                textAnchor="middle"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 2.5 }}
+                style={{ filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' }}
+              >
+                REALITY GAP
+              </motion.text>
+            </svg>
+
+            {/* Character 1: Doctor & Patient Scene (positioned on left of path) */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 1.0 }}
-              className="absolute left-1/2 -translate-x-1/2 top-[25%] w-[200px] z-30"
+              className="absolute"
+              style={{ 
+                left: '50px',
+                top: '120px',
+                width: '280px'
+              }}
+            >
+              <div className="bg-blue-50/90 rounded-3xl p-4 backdrop-blur-sm border-2 border-blue-100 shadow-xl">
+                <img src={doctorPatient} alt="Doctor consulting patient" className="w-full h-auto rounded-2xl" />
+              </div>
+            </motion.div>
+
+            {/* Character 2: Overwhelmed Person Walking (center, following path) */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { 
+                opacity: 1,
+              } : {}}
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="absolute z-30"
+              style={{ 
+                left: '380px',
+                top: '180px',
+                width: '180px'
+              }}
             >
               <div className="relative">
-                <img src={overwhelmed} alt="Overwhelmed person" className="w-full h-auto relative z-10" />
+                <img 
+                  src={overwhelmed} 
+                  alt="Overwhelmed person" 
+                  className="w-full h-auto drop-shadow-lg" 
+                />
                 
-                {/* Floating Icons */}
-                <div className="absolute inset-0 w-[300px] h-[300px] -left-12 -top-8">
+                {/* Floating Icons around center person */}
+                <div className="absolute inset-0 w-[400px] h-[350px] -left-24 -top-12">
                   {floatingIcons.map((item, i) => (
                     <motion.div
                       key={i}
-                      className="absolute bg-[#5a7fa5]/90 backdrop-blur-sm p-2.5 rounded-lg shadow-lg border border-white/20"
+                      className="absolute bg-[#5a7fa5] backdrop-blur-sm p-2.5 rounded-lg shadow-lg border-2 border-blue-100"
                       style={item.position}
                       initial={{ scale: 0, opacity: 0 }}
                       animate={isInView ? { 
-                        scale: [0, 1.1, 1],
+                        scale: [0, 1.15, 1],
                         opacity: 1,
-                        y: [0, -8, 0]
+                        y: [0, -10, 0]
                       } : {}}
                       transition={{ 
-                        duration: 0.6, 
-                        delay: 1.2 + item.delay,
+                        duration: 0.7, 
+                        delay: 2.0 + item.delay,
                         y: {
-                          duration: 2,
+                          duration: 2.5,
                           repeat: Infinity,
                           ease: "easeInOut",
                           delay: item.delay
                         }
                       }}
                     >
-                      <item.Icon className="w-5 h-5 text-white" />
+                      <item.Icon className="w-5 h-5 md:w-6 md:h-6 text-white" strokeWidth={2.5} />
                     </motion.div>
                   ))}
                 </div>
               </div>
             </motion.div>
 
-            {/* Character 3: Confident Person (Right) */}
+            {/* Character 3: Confident Person Walking Up (right side on ascending path) */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 1.4 }}
-              className="absolute right-[8%] top-[15%] w-[220px]"
+              animate={isInView ? { 
+                opacity: 1, 
+                x: 0,
+              } : {}}
+              transition={{ duration: 0.8, delay: 2.0 }}
+              className="absolute"
+              style={{ 
+                right: '80px',
+                top: '220px',
+                width: '200px'
+              }}
             >
-              <img src={confident} alt="Confident person walking" className="w-full h-auto" />
+              <img 
+                src={confident} 
+                alt="Confident person walking" 
+                className="w-full h-auto drop-shadow-lg" 
+                style={{ transform: 'rotate(-12deg)' }}
+              />
             </motion.div>
 
-            {/* Bottom Descriptions */}
-            <div className="absolute bottom-8 left-0 right-0 grid grid-cols-1 md:grid-cols-3 gap-4 px-4">
+            {/* Bottom Text Descriptions */}
+            <div className="absolute bottom-4 left-0 right-0 grid grid-cols-1 md:grid-cols-3 gap-4 px-4 z-20">
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: 1.6 }}
+                transition={{ duration: 0.6, delay: 2.8 }}
                 className="text-center"
               >
-                <p className="text-gray-700 font-medium text-lg">Inside the clinic,</p>
-                <p className="text-gray-700 font-medium text-lg">the plan is clear</p>
+                <p className="text-gray-800 font-medium text-base md:text-lg">Inside the clinic,</p>
+                <p className="text-gray-800 font-medium text-base md:text-lg">the plan is clear</p>
               </motion.div>
               
               <div className="hidden md:block" />
@@ -215,12 +245,12 @@ export default function TheGap() {
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.6, delay: 1.8 }}
+                transition={{ duration: 0.6, delay: 3.0 }}
                 className="text-center"
               >
-                <p className="text-gray-700 font-medium text-lg">SiriusMed builds a</p>
-                <p className="text-gray-700 font-medium text-lg">continuous health layer</p>
-                <p className="text-gray-700 font-medium text-lg">between visits</p>
+                <p className="text-gray-800 font-medium text-base md:text-lg">SiriusMed builds a</p>
+                <p className="text-gray-800 font-medium text-base md:text-lg">continuous health layer</p>
+                <p className="text-gray-800 font-medium text-base md:text-lg">between visits</p>
               </motion.div>
             </div>
           </div>
