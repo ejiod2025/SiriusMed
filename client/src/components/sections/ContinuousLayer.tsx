@@ -121,10 +121,10 @@ export default function ContinuousLayer() {
                   <Frown className="w-10 h-10 text-white" strokeWidth={2.5} />
                 </div>
               </foreignObject>
-              <foreignObject x="460" y="370" width="330" height="100">
-                <div className="text-right">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">Monitor</h3>
-                  <p className="text-sm text-gray-600 leading-tight">Side-effect and symptom capture</p>
+              <foreignObject x="460" y="360" width="330" height="120">
+                <div className="text-right pr-4">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Monitor</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">Side-effect and symptom capture</p>
                 </div>
               </foreignObject>
             </motion.g>
