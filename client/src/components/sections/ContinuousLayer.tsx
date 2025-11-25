@@ -124,7 +124,7 @@ export default function ContinuousLayer() {
               <foreignObject x="460" y="370" width="330" height="100">
                 <div className="text-right">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">Monitor</h3>
-                  <p className="text-sm text-gray-600 leading-tight">Icons showing side-effect and symptom capture</p>
+                  <p className="text-sm text-gray-600 leading-tight">Side-effect and symptom capture</p>
                 </div>
               </foreignObject>
             </motion.g>
@@ -145,7 +145,7 @@ export default function ContinuousLayer() {
               <foreignObject x="10" y="170" width="240" height="80">
                 <div className="text-left">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">Adapt</h3>
-                  <p className="text-sm text-gray-600">Icons showing side-effect, and symptom capture</p>
+                  <p className="text-sm text-gray-600">Side-effect, and symptom capture</p>
                 </div>
               </foreignObject>
             </motion.g>
