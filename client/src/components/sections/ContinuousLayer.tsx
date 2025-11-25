@@ -100,10 +100,10 @@ export default function ContinuousLayer() {
                   <Users className="w-10 h-10 text-white" strokeWidth={2.5} />
                 </div>
               </foreignObject>
-              <foreignObject x="200" y="570" width="240" height="80">
+              <foreignObject x="150" y="570" width="250" height="100">
                 <div className="text-left">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">Engage</h3>
-                  <p className="text-sm text-gray-600">Patient enters real-life environment</p>
+                  <p className="text-sm text-gray-600 leading-tight">Patient enters real-life environment</p>
                 </div>
               </foreignObject>
             </motion.g>
@@ -121,10 +121,10 @@ export default function ContinuousLayer() {
                   <Frown className="w-10 h-10 text-white" strokeWidth={2.5} />
                 </div>
               </foreignObject>
-              <foreignObject x="510" y="370" width="280" height="80">
+              <foreignObject x="460" y="370" width="330" height="100">
                 <div className="text-right">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">Monitor</h3>
-                  <p className="text-sm text-gray-600">Icons showing side-effect and symptom capture</p>
+                  <p className="text-sm text-gray-600 leading-tight">Icons showing side-effect and symptom capture</p>
                 </div>
               </foreignObject>
             </motion.g>
