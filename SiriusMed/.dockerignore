@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+client/node_modules
+
+# Builds and caches
+dist
+.cache
+.vite
+
+# VCS
+.git
+.gitignore
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+
+# Misc
+coverage
+npm-debug.log*
+yarn-error.log*
+Screenshot*

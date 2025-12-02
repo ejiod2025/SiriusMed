@@ -6,6 +6,7 @@ import MultiChannel from "@/components/sections/MultiChannel";
 import PatientJourney from "@/components/sections/PatientJourney";
 import ClinicianView from "@/components/sections/ClinicianView";
 import Footer from "@/components/sections/Footer";
+import DemoForm from "@/components/sections/DemoForm";
 
 export default function Home() {
   return (
@@ -24,9 +25,9 @@ export default function Home() {
             <a href="#journey" className="hover:text-foreground transition-colors">Journey</a>
           </div>
 
-          <button className="px-5 py-2 rounded-full bg-foreground text-background text-sm font-bold hover:scale-105 transition-transform">
+          <a href="#book-demo" className="px-5 py-2 rounded-full bg-foreground text-background text-sm font-bold hover:scale-105 transition-transform">
             Book Demo
-          </button>
+          </a>
         </nav>
       </header>
 
@@ -37,6 +38,7 @@ export default function Home() {
         <MultiChannel />
         <PatientJourney />
         <ClinicianView />
+        <DemoForm />
       </main>
 
       <Footer />

@@ -1,0 +1,27 @@
+# This file tells gcloud which files to exclude when uploading source.
+# It follows .gitignore-style patterns.
+
+# Node dependencies
+node_modules/
+client/node_modules/
+
+# Build outputs
+dist/
+.cache/
+.vite/
+
+# VCS
+.git/
+.gitignore
+
+# OS/editor files
+.DS_Store
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+# Misc
+Screenshot*

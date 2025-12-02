@@ -40,9 +40,9 @@ export default function Footer() {
             <div className="text-sm text-muted-foreground">
                 &copy; 2024 SiriusMed Inc. All rights reserved.
             </div>
-            <button className="group flex items-center gap-2 font-bold text-sm hover:text-primary transition-colors">
+            <a href="#book-demo" className="group flex items-center gap-2 font-bold text-sm hover:text-primary transition-colors">
                 Start your journey <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
         </div>
       </div>
     </footer>

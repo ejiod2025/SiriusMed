@@ -135,12 +135,12 @@ export default function ClinicianView() {
                             <div className="flex justify-between items-start mb-4 relative z-10">
                                 <div>
                                     <div className="text-gray-500 text-xs font-bold uppercase tracking-wider">Avg Adherence</div>
-                                    <div className="text-3xl font-bold text-gray-900 mt-1">88%</div>
+                                    <div className="text-3xl font-bold text-gray-900 mt-1">98%</div>
                                     <div className="text-xs text-green-600 font-medium mt-1 flex items-center gap-1">
                                         <TrendingUp size={12} /> +2.4% vs last week
                                     </div>
                                 </div>
-                                <CircularProgress value={88} color="text-primary" size={60} strokeWidth={6} />
+                                <CircularProgress value={98} color="text-primary" size={60} strokeWidth={6} />
                             </div>
                             <WaveChart />
                         </div>

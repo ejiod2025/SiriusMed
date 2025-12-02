@@ -1,8 +1,17 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+
+function log(message: string, source = "express") {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
 
 declare module 'http' {
   interface IncomingMessage {
@@ -47,6 +56,8 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  const ext = process.env.NODE_ENV === "development" ? ".ts" : ".js";
+  const { registerRoutes } = await import(`./routes${ext}`);
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -61,21 +72,36 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
+    const { setupVite } = await import(`./vite${ext}`);
     await setupVite(app, server);
   } else {
+    const { serveStatic } = await import(`./static${ext}`);
     serveStatic(app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
+  // Use PORT env when provided.
+  // In development default to 5173 (Vite default; avoids macOS AirPlay on 5000).
+  // In production default to 5000.
+  const defaultPort = app.get("env") === "development" ? 5173 : 5000;
+  const port = Number.parseInt(process.env.PORT || String(defaultPort), 10);
+
+  const httpServer = server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+    },
+    () => {
+      log(`serving on port ${port}`);
+    },
+  );
+
+  httpServer.on("error", (err: NodeJS.ErrnoException) => {
+    if (err.code === "EADDRINUSE") {
+      log(
+        `Port ${port} is already in use. Set PORT to a free port (e.g. \`PORT=3001 npm run dev\`).`,
+      );
+      process.exit(1);
+    }
+    throw err;
   });
 })();
